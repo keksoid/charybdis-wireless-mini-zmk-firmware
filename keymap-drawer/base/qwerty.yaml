@@ -1,7 +1,7 @@
 layout: {zmk_keyboard: qwerty}
 layers:
   Base:
-  - SEARCH
+  - '&td_layers_4'
   - Q
   - W
   - E
@@ -12,7 +12,7 @@ layers:
   - I
   - O
   - P
-  - L_BASE L_GAME
+  - '&td_layers_4'
   - TAB
   - {t: A, h: LCMD}
   - {t: S, h: LALT}
@@ -26,7 +26,7 @@ layers:
   - {t: ;, h: RCMD}
   - DEL
   - CLIP HIST
-  - Z
+  - {t: Z, h: LWIN}
   - X
   - C
   - V
@@ -168,8 +168,8 @@ layers:
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
   - {t: ▽, type: trans}
-  Game:
-  - SEARCH
+  Russan:
+  - '&td_layers_0'
   - RU CYRILLIC SHORT I
   - RU CYRILLIC TSE
   - RU CYRILLIC U
@@ -180,7 +180,7 @@ layers:
   - RU CYRILLIC SHA
   - RU CYRILLIC SHCHA
   - RU CYRILLIC ZE
-  - L_BASE L_GAME
+  - RU CYRILLIC HA
   - TAB
   - {t: RU CYRILLIC EF, h: LCMD}
   - {t: RU CYRILLIC YERU, h: LALT}
@@ -194,7 +194,7 @@ layers:
   - {t: RU CYRILLIC ZHE, h: RCMD}
   - RU CYRILLIC E
   - CLIP HIST
-  - RU CYRILLIC YA
+  - {t: RU CYRILLIC YA, h: LWIN}
   - RU CYRILLIC CHE
   - RU CYRILLIC ES
   - RU CYRILLIC EM
@@ -203,8 +203,8 @@ layers:
   - RU CYRILLIC SOFT SIGN
   - RU CYRILLIC BE
   - RU CYRILLIC YU
-  - {t: '?', s: '!'}
-  - /
+  - {t: ., s: ':'}
+  - RU CYRILLIC HARD SIGN
   - ESC SCRL SLOW
   - SYM LCLK
   - BS NUM
