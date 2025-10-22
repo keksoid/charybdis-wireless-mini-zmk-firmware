@@ -30,7 +30,7 @@
 
         combo_precision_mouse {
             bindings = <&mo 6>;
-            key-positions = <16 36>;
+            key-positions = <16 37>;
         };
     };
 };

@@ -128,7 +128,7 @@
             compatible = "zmk,behavior-tap-dance";
             #binding-cells = <0>;
             tapping-term-ms = <150>;
-            bindings = <&lt 7 ESC>, <&mo 6>; // hold, tap, double_tap
+            bindings = <&lt 3 ESC>, <&mo 6>; // hold, tap, double_tap
         };
 
         lt_nav: nav_layer_tap {
@@ -159,7 +159,7 @@
             compatible = "zmk,behavior-tap-dance";
             #binding-cells = <0>;
             tapping-term-ms = <170>;
-            bindings = <&mo_clk 6 LCLK>, <&mkp LCLK>; // hold, tap, double_tap
+            bindings = <&mo_clk 7 LCLK>, <&mkp LCLK>; // hold, tap, double_tap
         };
 
         mo_kp: mo_kp {
