@@ -145,7 +145,7 @@ layers:
   - LSHFT
   - LCTRL
   - FWD
-  - HSPLIT
+  - INSERT
   - LEFT
   - DOWN
   - UP
@@ -157,7 +157,7 @@ layers:
   - MOVE UP
   - MOVE R
   - ''
-  - VSPLIT
+  - DELETE
   - HOME
   - PG DN
   - PG UP
