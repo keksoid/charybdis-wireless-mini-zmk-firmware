@@ -12,7 +12,7 @@ layers:
   - I
   - O
   - P
-  - {t: '?', s: '!'}
+  - DELETE
   - TAB
   - {t: A, h: LCMD}
   - {t: S, h: LALT}
@@ -24,7 +24,7 @@ layers:
   - {t: K, h: RSHFT}
   - {t: L, h: LALT}
   - {t: ;, h: RCMD}
-  - DELETE
+  - ''''
   - CLIP HIST
   - Z
   - X
@@ -35,8 +35,8 @@ layers:
   - M
   - ','
   - .
+  - {t: '?', s: '!'}
   - /
-  - ''''
   - ESC SCRL SLOW
   - SYM LCLK
   - BS NUM
