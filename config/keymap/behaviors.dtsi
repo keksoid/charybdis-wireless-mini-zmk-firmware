@@ -142,7 +142,7 @@
         td_space_nav: td_space {
             compatible = "zmk,behavior-tap-dance";
             #binding-cells = <0>;
-            tapping-term-ms = <110>;
+            tapping-term-ms = <280>;
             bindings = <&lt_nav 3 SPACE>, <&kp SPACE>; // hold, tap, double_tap
         };
 
@@ -174,7 +174,7 @@
         td_backspace_num: td_backspace_num {
             compatible = "zmk,behavior-tap-dance";
             #binding-cells = <0>;
-            tapping-term-ms = <170>;
+            tapping-term-ms = <280>;
             bindings = <&mo_kp 2 BACKSPACE>, <&kp BACKSPACE>; // hold, tap, double_tap
         };
 
