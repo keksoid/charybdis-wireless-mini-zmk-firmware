@@ -124,7 +124,7 @@
             hold-trigger-key-positions = <KEYS_L THUMBS>;
         };
 
-        td_esc_sym: td_esc_sym {
+        td_esc_scrl_slow: td_esc_scrl_slow {
             compatible = "zmk,behavior-tap-dance";
             #binding-cells = <0>;
             tapping-term-ms = <150>;
@@ -155,7 +155,7 @@
             bindings = <&mo>, <&mkp>;
         };
 
-        td_clk: td_clk {
+        td_mouse_scroll: td_mouse_scroll {
             compatible = "zmk,behavior-tap-dance";
             #binding-cells = <0>;
             tapping-term-ms = <170>;
