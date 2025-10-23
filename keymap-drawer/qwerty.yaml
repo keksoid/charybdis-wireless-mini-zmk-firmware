@@ -100,9 +100,9 @@ layers:
   - {t: ▽, type: trans}
   - ''
   - ''
-  - ''
   - LSHIFT
   - BACK SPACE
+  - ''
   - '-'
   - {t: '4', s: F4}
   - {t: '5', s: F5}
