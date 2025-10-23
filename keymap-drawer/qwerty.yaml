@@ -12,7 +12,7 @@ layers:
   - I
   - O
   - P
-  - ''''
+  - {t: '?', s: '!'}
   - TAB
   - {t: A, h: LCMD}
   - {t: S, h: LALT}
@@ -36,7 +36,7 @@ layers:
   - ','
   - .
   - /
-  - {t: '?', s: '!'}
+  - ''''
   - ESC SCRL SLOW
   - SYM LCLK
   - BS NUM
