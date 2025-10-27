@@ -22,7 +22,7 @@ layers:
   - H
   - {t: J, h: RCTRL}
   - {t: K, h: RSHFT}
-  - {t: L, h: RALT}
+  - {t: L, h: LALT}
   - {t: ;, h: RCMD}
   - ''''
   - CLIP HIST
@@ -34,7 +34,7 @@ layers:
   - N
   - M
   - ','
-  - .
+  - {t: ., h: RALT}
   - {t: '?', s: '!'}
   - /
   - ESC SCRL SLOW
