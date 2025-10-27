@@ -139,11 +139,11 @@
             bindings = <&mo>, <&kp>;
         };
 
-        td_space_nav: td_space {
+        td_space_ralt: td_space {
             compatible = "zmk,behavior-tap-dance";
             #binding-cells = <0>;
             tapping-term-ms = <150>;
-            bindings = <&lt_nav 3 SPACE>, <&kp SPACE>; // hold, tap, double_tap
+            bindings = <&ht_right RALT SPACE>, <&kp SPACE>; // hold, tap, double_tap
         };
 
         mo_clk: mo_click {

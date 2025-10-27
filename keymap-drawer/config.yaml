@@ -208,7 +208,7 @@ parse_config:
     "&js_iter": "JS LOOP",
     "&studio_unlock": "ZMK Studio",
     "&td_esc_sym": "ESC SCRL SLOW",
-    "&td_space_nav": "SPACE NAV",
+    "&td_space_ralt": "SPACE NAV",
     "&td_backspace_num": "BS NUM",
     "&detach_session": "TMUX DETCH",
     "&create_or_attach": "TMUX ATTCH",
