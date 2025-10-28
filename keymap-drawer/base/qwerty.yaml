@@ -96,7 +96,7 @@ layers:
   - {t: '8', s: F8}
   - {t: '9', s: F9}
   - {t: '%', s: F10}
-  - ''
+  - DELETE
   - TAB
   - LCMD
   - LALT
@@ -108,7 +108,7 @@ layers:
   - {t: '5', s: F5}
   - {t: '6', s: F6}
   - {t: '*', s: F11}
-  - ''
+  - '&mm_qm_exв'
   - ''
   - ''
   - X
