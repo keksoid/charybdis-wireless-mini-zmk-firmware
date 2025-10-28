@@ -34,7 +34,7 @@ layers:
   - N
   - M
   - ','
-  - {t: ., h: RALT}
+  - .
   - {t: '?', s: '!'}
   - /
   - ESC SCRL SLOW
