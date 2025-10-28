@@ -72,7 +72,7 @@
             display-name = "Num";
             bindings = <
 &none    &none     &none     &none       &none      &none            &kp PLUS     &mm_f7             &mm_f8             &mm_f9             &mm_f10            &kp DELETE
-&kp TAB  &kp LCMD  &kp LALT  &kp LSHIFT  &kp LCTRL  &kp BACKSPACE    &kp MINUS    &mm_f4             &mm_f5             &mm_f6             &mm_f11            &mm_qm_exв
+&kp TAB  &kp LCMD  &kp LALT  &kp LSHIFT  &kp LCTRL  &kp BACKSPACE    &kp MINUS    &mm_f4             &mm_f5             &mm_f6             &mm_f11            &mm_qm_ex
 &none    &none     &kp X     &none       &none      &none            &kp EQUAL    &mm_f1             &mm_f2             &mm_f3             &mm_f12            &kp KP_SLASH
                              &none       &none      &trans           &kp N0       &kp SPACE
             >;
