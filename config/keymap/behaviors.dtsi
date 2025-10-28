@@ -139,14 +139,14 @@
             bindings = <&mo>, <&kp>;
         };
 
-        td_func_space: td_space {
+        td_func_space: td_func_space {
             compatible = "zmk,behavior-tap-dance";
             #binding-cells = <0>;
             tapping-term-ms = <150>;
             bindings = <&lt 8 SPACE>, <&kp SPACE>; // hold, tap, double_tap
         };
 
-        td_enter_ralt: td_space {
+        td_enter_ralt: td_enter_ralt {
             compatible = "zmk,behavior-tap-dance";
             #binding-cells = <0>;
             tapping-term-ms = <150>;
