@@ -77,7 +77,7 @@ layers:
   - RU CYRILLIC SOFT SIGN
   - RU CYRILLIC BE
   - RU CYRILLIC YU
-  - {t: ., s: ':'}
+  - RU PERIOD
   - RU CYRILLIC HARD SIGN
   - ESC SCRL SLOW
   - SYM LCLK
