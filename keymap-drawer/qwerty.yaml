@@ -40,7 +40,7 @@ layers:
   - ESC SCRL SLOW
   - SYM LCLK
   - BS NUM
-  - ENTER
+  - '&td_enter_ralt'
   - SPACE NAV
   Russan:
   - '&td_layers_0'
@@ -335,6 +335,48 @@ layers:
   - ''
   - ''
   - ''
+  - {t: ▽, type: trans}
+  Functional:
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - ''
+  - +
+  - f7
+  - f8
+  - f9
+  - f10
+  - ''
+  - TAB
+  - LCMD
+  - LALT
+  - LSHIFT
+  - LCTRL
+  - BACK SPACE
+  - '-'
+  - f4
+  - f5
+  - f6
+  - f11
+  - ''
+  - ''
+  - ''
+  - X
+  - ''
+  - ''
+  - ''
+  - '='
+  - f1
+  - f2
+  - f3
+  - f12
+  - /
+  - ''
+  - ''
+  - {t: ▽, type: trans}
+  - {t: ▽, type: trans}
   - {t: ▽, type: trans}
 combos:
 - p: [17, 18]
