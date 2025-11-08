@@ -6,6 +6,8 @@ manifest:
     - name: 280Zo
       url-base: https://github.com/280Zo
 
+    - name: janpfischer
+      url-base: https://github.com/janpfischer
   projects:
     - name: zmk
       remote: zmkfirmware
@@ -16,5 +18,8 @@ manifest:
       remote: 280Zo
       revision: main
 
+    - name: zmk-dongle-screen
+      remote: janpfischer
+      revision: main
   self:
     path: config
