@@ -10,7 +10,6 @@ shield:
   - settings_reset
 
 format:
-  - bt
   - dongle
   - reset
 
