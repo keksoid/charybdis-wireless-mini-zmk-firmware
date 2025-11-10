@@ -147,51 +147,51 @@ jobs:
         # ──────────────────────────────────────────────────────────────
 
 #        for SH in ${LIST[$FM]}; do
-          BUILD_DIR=$(mktemp -d)
+        BUILD_DIR=$(mktemp -d)
 
           # studio RPC only on right half of BT builds
 #          if [[ "$FM" == "bt" && "$SH" == *right ]]; then
 #            SNIPPET_OPTION="-DSNIPPET=studio-rpc-usb-uart"
 #          else
-            SNIPPET_OPTION=""
+        SNIPPET_OPTION=""
 #          fi
 
           # set keymap
-          if [[ "$FM" != "reset" ]]; then
-            KEYMAP_OPTION="-DKEYMAP_FILE=overlays/charybdis.keymap"
-          else
-            KEYMAP_OPTION=""
-          fi
+        if [[ "$FM" != "reset" ]]; then
+          KEYMAP_OPTION="-DKEYMAP_FILE=overlays/charybdis.keymap"
+        else
+          KEYMAP_OPTION=""
+        fi
 
           # ───────── DEBUG LOGS ─────────
-          echo "🪳 Debug Logs"
-          echo "Build Variables:"
-          echo "→ Keymap       (KM): $KM"
-          echo "→ Format       (FM): $FM"
-          echo "→ Name         (NM): $NM"
-          echo "→ Board        (BD): $BD"
-          echo "→ Current directory: $(pwd)"
-          echo "→ KEYMAP_OPTION    :$KEYMAP_OPTION"
-          echo "→ SNIPPET_OPTION   :$SNIPPET_OPTION"
-          echo "→ Build dir        : $BUILD_DIR"
+        echo "🪳 Debug Logs"
+        echo "Build Variables:"
+        echo "→ Keymap       (KM): $KM"
+        echo "→ Format       (FM): $FM"
+        echo "→ Name         (NM): $NM"
+        echo "→ Board        (BD): $BD"
+        echo "→ Current directory: $(pwd)"
+        echo "→ KEYMAP_OPTION    :$KEYMAP_OPTION"
+        echo "→ SNIPPET_OPTION   :$SNIPPET_OPTION"
+        echo "→ Build dir        : $BUILD_DIR"
           # echo "→ Directory contents:"
           # tree .
           # echo "📍 Showing current build directory and listing contents:"
           # echo "GITHUB_WORKSPACE:"
           # tree $GITHUB_WORKSPACE
 
-          echo "🛠 Kicking off the firmware build..."
-          west build -p \
-            -d "$BUILD_DIR" \
-            -b "$BD" \
-            -- \
-            "-DZMK_CONFIG=$CONFIG_DIR" \
-            "-DSHIELD=charybdis_dongle dongle_screen" \
-            "$KEYMAP_OPTION" \
-            "$SNIPPET_OPTION"
+        echo "🛠 Kicking off the firmware build..."
+        west build -p \
+          -d "$BUILD_DIR" \
+          -b "$BD" \
+          -- \
+          "-DZMK_CONFIG=$CONFIG_DIR" \
+          "-DSHIELD=charybdis_dongle dongle_screen" \
+          "$KEYMAP_OPTION" \
+          "$SNIPPET_OPTION"
 
-          ART=$(if [[ -f "$BUILD_DIR/zephyr/zmk.uf2" ]]; then echo zmk.uf2; else echo zmk.bin; fi)
-          cp "$BUILD_DIR/zephyr/$ART" "$GITHUB_WORKSPACE/out/$NM/charybdis_dongle.${ART##*.}"
+        ART=$(if [[ -f "$BUILD_DIR/zephyr/zmk.uf2" ]]; then echo zmk.uf2; else echo zmk.bin; fi)
+        cp "$BUILD_DIR/zephyr/$ART" "$GITHUB_WORKSPACE/out/$NM/charybdis_dongle.${ART##*.}"
 #        done
 
     - name: Upload firmware bundle
