@@ -135,27 +135,11 @@ jobs:
         NM="${{ matrix.combo.name }}"
         BD="${{ matrix.combo.board }}"    # nice_nano_v2
 
-#        declare -A LIST=(
-#          [bt]="charybdis_left charybdis_right"
-#          [dongle]="charybdis_left charybdis_right charybdis_dongle"
-#          [reset]="settings_reset"
-#        )
-
         mkdir -p "$GITHUB_WORKSPACE/out/$NM"
         CONFIG_DIR="$GITHUB_WORKSPACE/config"
-        
-        # ──────────────────────────────────────────────────────────────
-
-#        for SH in ${LIST[$FM]}; do
         BUILD_DIR=$(mktemp -d)
 
-          # studio RPC only on right half of BT builds
-#          if [[ "$FM" == "bt" && "$SH" == *right ]]; then
-#            SNIPPET_OPTION="-DSNIPPET=studio-rpc-usb-uart"
-#          else
         SNIPPET_OPTION=""
-#          fi
-
           # set keymap
         if [[ "$FM" != "reset" ]]; then
           KEYMAP_OPTION="-DKEYMAP_FILE=overlays/charybdis.keymap"
@@ -163,7 +147,6 @@ jobs:
           KEYMAP_OPTION=""
         fi
 
-          # ───────── DEBUG LOGS ─────────
         echo "🪳 Debug Logs"
         echo "Build Variables:"
         echo "→ Keymap       (KM): $KM"
@@ -192,7 +175,6 @@ jobs:
 
         ART=$(if [[ -f "$BUILD_DIR/zephyr/zmk.uf2" ]]; then echo zmk.uf2; else echo zmk.bin; fi)
         cp "$BUILD_DIR/zephyr/$ART" "$GITHUB_WORKSPACE/out/$NM/charybdis_dongle.${ART##*.}"
-#        done
 
     - name: Upload firmware bundle
       uses: actions/upload-artifact@v4
