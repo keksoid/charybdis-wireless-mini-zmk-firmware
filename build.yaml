@@ -6,7 +6,7 @@ board:
 shield:
   - charybdis_left
   - charybdis_right
-  - charybdis_dongle
+  - charybdis_dongle dongle_screen
   - settings_reset
 
 format:
