@@ -135,18 +135,74 @@ jobs:
         NM="${{ matrix.combo.name }}"
         BD="${{ matrix.combo.board }}"    # nice_nano_v2
 
-        declare -A LIST=(
-          [bt]="charybdis_left charybdis_right"
-          [dongle]="charybdis_left charybdis_right charybdis_dongle"
-          [reset]="settings_reset"
-        )
+        # Dynamically build the shield lists from build.yaml instead of using a
+        # hardcoded mapping. This extracts the `shield:` block from build.yaml
+        # and then classifies shields into bt/dongle/reset groups based on name
+        # conventions (left/right/dongle/reset). This keeps behavior compatible
+        # with previous defaults but allows shields to be configured in
+        # build.yaml.
+
+        # Read shields from build.yaml (simple YAML extractor that looks for the
+        # `shield:` section and collects the following `- item` lines). Preserve
+        # line breaks so shield names containing spaces are kept intact.
+        mapfile -t SHIELDS_ARR < <(awk '/^shield:/{flag=1; next} flag && /^[ \t]*-/{gsub(/^[ \t]*-[ \t]*/,"",$0); print $0} flag && !/^[ \t]*-/{exit}' "$GITHUB_WORKSPACE/build.yaml")
+
+        # Prepare arrays
+        BT_SHIELDS=()
+        DONGLE_SHIELDS=()
+        RESET_SHIELDS=()
+
+        for SH in "${SHIELDS_ARR[@]}"; do
+          # trim leading/trailing whitespace
+          SH=$(echo "$SH" | sed -e 's/^[ \t]*//' -e 's/[ \t]*$//')
+          # skip empty lines
+          [ -z "$SH" ] && continue
+
+          # classify reset-type shields
+          if [[ "$SH" == *reset* ]]; then
+            RESET_SHIELDS+=("$SH")
+          fi
+
+          # classify dongle-type shields
+          if [[ "$SH" == *dongle* ]]; then
+            DONGLE_SHIELDS+=("$SH")
+          fi
+
+          # classify left/right shields (used by bt builds)
+          if [[ "$SH" == *left* || "$SH" == *right* ]]; then
+            BT_SHIELDS+=("$SH")
+            # also include left/right in dongle builds (previous behavior)
+            DONGLE_SHIELDS+=("$SH")
+          fi
+        done
+
+        # Fallbacks to preserve previous behavior if build.yaml doesn't specify
+        # expected shields.
+        if [ ${#BT_SHIELDS[@]} -eq 0 ]; then
+          BT_SHIELDS=(charybdis_left charybdis_right)
+        fi
+        if [ ${#DONGLE_SHIELDS[@]} -eq 0 ]; then
+          DONGLE_SHIELDS=(charybdis_left charybdis_right charybdis_dongle)
+        fi
+        if [ ${#RESET_SHIELDS[@]} -eq 0 ]; then
+          RESET_SHIELDS=(settings_reset)
+        fi
+
+        # Select target shield list based on format and iterate over that array
+        if [[ "$FM" == "bt" ]]; then
+          TARGET_SHIELDS=("${BT_SHIELDS[@]}")
+        elif [[ "$FM" == "dongle" ]]; then
+          TARGET_SHIELDS=("${DONGLE_SHIELDS[@]}")
+        else
+          TARGET_SHIELDS=("${RESET_SHIELDS[@]}")
+        fi
 
         mkdir -p "$GITHUB_WORKSPACE/out/$NM"
         CONFIG_DIR="$GITHUB_WORKSPACE/config"
         
         # ──────────────────────────────────────────────────────────────
 
-        for SH in ${LIST[$FM]}; do
+        for SH in "${TARGET_SHIELDS[@]}"; do
           BUILD_DIR=$(mktemp -d)
 
           # studio RPC only on right half of BT builds
@@ -174,6 +230,7 @@ jobs:
           echo "→ KEYMAP_OPTION    :$KEYMAP_OPTION"
           echo "→ SNIPPET_OPTION   :$SNIPPET_OPTION"
           echo "→ Build dir        : $BUILD_DIR"
+          echo "→ Shield           : $SH"
           # echo "→ Directory contents:"
           # tree .
           # echo "📍 Showing current build directory and listing contents:"
