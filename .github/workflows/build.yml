@@ -62,8 +62,8 @@ jobs:
         combo: ${{ fromJson(needs.setup.outputs.groups) }}
 
     steps:
-    - name: Install tree
-      run: apt-get update && apt-get install -y tree
+    - name: Install tree and jq
+      run: apt-get update && apt-get install -y tree jq
 
     # ───────── update zmk sub-repo ─────────
     - name: Checkout workflow repo
