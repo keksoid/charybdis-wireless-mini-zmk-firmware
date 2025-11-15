@@ -40,7 +40,7 @@ jobs:
 
     - id: make-groups
       run: |
-        echo "groups=$(jq -c 'map({keymap,format,name,board})' build.json)" >>"$GITHUB_OUTPUT"
+        echo "groups=$(jq -c '.' build.json)" >>"$GITHUB_OUTPUT"
         echo "⚙️ Build Matrix Created"
         cat build.json | jq .
 
@@ -134,24 +134,21 @@ jobs:
         FM="${{ matrix.combo.format }}"   # bt | dongle | reset
         NM="${{ matrix.combo.name }}"
         BD="${{ matrix.combo.board }}"    # nice_nano_v2
-
-        declare -A LIST=(
-          [bt]="charybdis_left charybdis_right"
-          [dongle]="charybdis_left charybdis_right charybdis_dongle"
-          [reset]="settings_reset"
-        )
+        SNIPPET="${{ matrix.combo.snippet }}"
 
         mkdir -p "$GITHUB_WORKSPACE/out/$NM"
         CONFIG_DIR="$GITHUB_WORKSPACE/config"
         
         # ──────────────────────────────────────────────────────────────
 
-        for SH in ${LIST[$FM]}; do
+        # Iterate over shields from the matrix
+        shields='${{ toJson(matrix.combo.shields) }}'
+        while IFS= read -r SH; do
           BUILD_DIR=$(mktemp -d)
 
-          # studio RPC only on right half of BT builds
-          if [[ "$FM" == "bt" && "$SH" == *right ]]; then
-            SNIPPET_OPTION="-DSNIPPET=studio-rpc-usb-uart"
+          # Use snippet from matrix
+          if [[ -n "$SNIPPET" ]]; then
+            SNIPPET_OPTION="-DSNIPPET=$SNIPPET"
           else
             SNIPPET_OPTION=""
           fi
@@ -170,15 +167,11 @@ jobs:
           echo "→ Format       (FM): $FM"
           echo "→ Name         (NM): $NM"
           echo "→ Board        (BD): $BD"
+          echo "→ Shield       (SH): $SH"
           echo "→ Current directory: $(pwd)"
           echo "→ KEYMAP_OPTION    :$KEYMAP_OPTION"
           echo "→ SNIPPET_OPTION   :$SNIPPET_OPTION"
           echo "→ Build dir        : $BUILD_DIR"
-          # echo "→ Directory contents:"
-          # tree .
-          # echo "📍 Showing current build directory and listing contents:"
-          # echo "GITHUB_WORKSPACE:"
-          # tree $GITHUB_WORKSPACE
 
           echo "🛠 Kicking off the firmware build..."
           west build -p \
@@ -192,7 +185,7 @@ jobs:
 
           ART=$(if [[ -f "$BUILD_DIR/zephyr/zmk.uf2" ]]; then echo zmk.uf2; else echo zmk.bin; fi)
           cp "$BUILD_DIR/zephyr/$ART" "$GITHUB_WORKSPACE/out/$NM/$SH.${ART##*.}"
-        done
+        done < <(echo "$shields" | jq -r '.[]')
 
     - name: Upload firmware bundle
       uses: actions/upload-artifact@v4
