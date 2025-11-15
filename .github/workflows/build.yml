@@ -26,9 +26,9 @@ jobs:
 
     - name: OS deps
       run: sudo apt-get update && sudo apt-get install -y jq
-      
-    - name: Add PyYAML
-      run: sudo pip install pyyaml
+
+    - name: Install Python dependencies
+      run: pip install pyyaml
 
     # - name: Generate extra keymaps
     #   run: |
