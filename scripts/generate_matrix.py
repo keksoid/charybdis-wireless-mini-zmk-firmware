@@ -1,36 +1,37 @@
 import json
+import yaml
 from pathlib import Path
+import sys
 
-# === CONFIGURATION ===
-board = "nice_nano_v2"
-# automatically find all *.keymap filenames under ../config/keymap
-keymap_dir = Path(__file__).parent.parent / "config" / "keymap"
-keymaps = sorted(p.stem for p in keymap_dir.glob("*.keymap"))
+# Read build.yaml and extract the matrix
+build_yaml_path = Path(__file__).parent.parent / 'build.yaml'
 
-# Map each format to the shields it should build
-format_shields = {
-    "bt": ["charybdis_left", "charybdis_right"],
-    "dongle": ["charybdis_left", "charybdis_right", "charybdis_dongle"],
-    "reset": ["settings_reset"],
-}
+if not build_yaml_path.exists():
+    print(json.dumps([]))
+    sys.exit(1)
 
+try:
+    with build_yaml_path.open() as fh:
+        config = yaml.safe_load(fh)
+except Exception as e:
+    print(f"Error reading YAML: {e}", file=sys.stderr)
+    print(json.dumps([]))
+    sys.exit(1)
+
+# Extract matrix entries from build.yaml
+matrix = config.get('matrix', [])
+
+# Transform each matrix entry to the format GitHub Actions expects
 groups = []
-for keymap in keymaps:
-    for fmt in ["bt", "dongle"]:
-        groups.append({
-            "keymap": keymap,
-            "format": fmt,
-            "name": f"{keymap}-{fmt}",
-            "board": board,
-        })
-
-# single reset entry
-groups.append({
-    "keymap": "default",
-    "format": "reset",
-    "name": "reset-nanov2",
-    "board": board,
-})
+for entry in matrix:
+    groups.append({
+        "name": entry.get('name'),
+        "format": entry.get('format'),
+        "board": entry.get('board'),
+        "keymap": entry.get('keymap'),
+        "shields": entry.get('shields', []),
+        "snippet": entry.get('snippet', '')
+    })
 
 # Dump matrix as compact JSON (GitHub expects it this way)
 print(json.dumps(groups))
