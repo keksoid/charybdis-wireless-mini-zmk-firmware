@@ -174,7 +174,10 @@ parse_config:
     KP_MINUS: "-"
     KP_SLASH: "/"
   raw_binding_map: {
-    "&td_mouse_scroll": "SYM LCLK",
+    "&td_mouse_scroll": "LCLK SCRL",
+    "&td_enter_ralt": "ENTER RALT",
+    "&td_layers_1": "RU LANG",
+    "&td_layers_0": "ENG LANG",
     "&bootloader": "BOOT LDR",
     "&mkp RCLK": "R CLK",
     "&mkp LCLK": "L CLK",
@@ -207,8 +210,8 @@ parse_config:
     "&py_iter": "PYTHON LOOP",
     "&js_iter": "JS LOOP",
     "&studio_unlock": "ZMK Studio",
-    "&td_esc_sym": "ESC SCRL SLOW",
-    "&td_func_space": "SPACE NAV",
+    "&td_esc_sym": "ESC SYM",
+    "&td_func_space": "SPACE FUNC",
     "&td_backspace_num": "BS NUM",
     "&detach_session": "TMUX DETCH",
     "&create_or_attach": "TMUX ATTCH",
